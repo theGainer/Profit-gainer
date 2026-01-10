@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %> - PROFIT-GAINER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+
+  <!-- Sidebar (desktop) -->
+  <aside class="sidebar d-none d-md-flex">
+    <div class="sidebar-header text-center mb-4">
+      <h2><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h2>
+    </div>
+    <ul class="sidebar-menu list-unstyled">
+      <li><a href="/dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+      <li><a href="/profile" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="/deposits"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+      <li><a href="/wallet"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+      <li><a href="/applyFunds"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+      <li><a href="/investments"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+      <li><a href="#" id="openSettings"><i class="fa-solid fa-gear"></i> Settings</a></li>
+      <li><a class="text-danger" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Mobile Navbar / Header -->
+  <header class="d-md-none">
+    <nav class="navbar navbar-dark glass-nav py-2">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <h6 class="mb-0 text-warning fw-bold text-truncate d-flex align-items-center">
+          <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+        </h6>
+        <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-start glass-nav text-white" tabindex="-1" id="mobileMenu">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="mobile-nav list-unstyled">
+          <li><a href="/dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+          <li><a href="/profile" class="nav-link active"><i class="fa-solid fa-user"></i> Profile</a></li>
+          <li><a href="/deposits" class="nav-link"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+          <li><a href="/wallet" class="nav-link"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+          <li><a href="/applyFunds" class="nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+          <li><a href="/investments" class="nav-link"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+          <li><a href="/support" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a></li>
+          <li><a href="#" class="nav-link" id="openSettingsMobile"><i class="fa-solid fa-gear"></i> Settings</a></li>
+          <li><a href="/logout" class="nav-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <header class="main-header text-center mb-4 d-none d-md-block">
+      <h1 class="text-truncate">Welcome, <%= user.full_name %> 👋</h1>
+      <p>Track your crypto profits and manage your profile</p>
+    </header>
+
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 mb-4">
+          <div class="profile-card glassmorphic text-center p-4 shadow">
+            <div class="profile-pic mb-3">
+              <% if (user && user.profile_pic) { %>
+                <img src="<%= user.profile_pic %>" alt="Profile Picture" class="rounded-circle img-fluid shadow">
+              <% } else { %>
+                <i class="fa-solid fa-circle-user fa-5x text-light"></i>
+              <% } %>
+            </div>
+
+            <h2 class="username"><%= user.full_name.split(' ')[0] %></h2>
+
+            <div class="row mt-4 g-3">
+              <!-- Monthly Gain (you can keep this or replace with overall if preferred) -->
+              <div class="col-6 d-flex">
+                <div class="stat-card w-100 text-success p-3 rounded shadow d-flex flex-column justify-content-center align-items-center">
+                  <h4><%= stats.monthlyGain %>%</h4>
+                  <p>Monthly Gain</p>
+                </div>
+              </div>
+
+              <!-- Total Invested -->
+              <div class="col-6 d-flex">
+                <div class="stat-card w-100 text-info p-3 rounded shadow d-flex flex-column justify-content-center align-items-center">
+                  <h4>$<%= stats.totalInvested.toLocaleString() %></h4>
+                  <p>Total Invested</p>
+                </div>
+              </div>
+
+              <!-- Total Profit -->
+              <div class="col-6 d-flex">
+                <div class="stat-card w-100 text-warning p-3 rounded shadow d-flex flex-column justify-content-center align-items-center">
+                  <h4>$<%= stats.totalProfit.toLocaleString() %></h4>
+                  <p>Profits</p>
+                </div>
+              </div>
+
+              <!-- NEW: Overall Profit Percentage -->
+              <div class="col-6 d-flex">
+                <div class="stat-card w-100 p-3 rounded shadow d-flex flex-column justify-content-center align-items-center <%= stats.total_gain_percentage >= 0 ? 'text-success' : 'text-danger' %>">
+                  <h4 class="fw-bold">
+                    <%= stats.total_gain_percentage > 0 ? '+' : '' %><%= stats.total_gain_percentage %>%
+                  </h4>
+                  <p>Overall Return</p>
+                </div>
+              </div>
+
+              <!-- Top Assets -->
+              <div class="col-12 d-flex">
+                <div class="stat-card w-100 text-primary p-3 rounded shadow d-flex flex-column justify-content-center align-items-center text-truncate">
+                  <h4 class="text-truncate"><%= stats.topAssets.join(" | ") %></h4>
+                  <p>Top Assets</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer mt-auto text-center">
+      <p>© 2025 Profit-Gainer Platform. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Settings Modal -->
+  <div class="settings-modal" id="settingsModal">
+    <div class="settings-content">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Profile Settings</h4>
+        <i class="fa-solid fa-xmark close-settings" id="closeSettings"></i>
+      </div>
+
+      <form action="/profile/update-username" method="POST" class="mb-3">
+        <label class="form-label">Update Username</label>
+        <div class="input-group">
+          <input type="text" name="username" class="form-control" placeholder="New username">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+      <form action="/profile/upload-pic" method="POST" enctype="multipart/form-data">
+        <label class="form-label">Update Profile Picture</label>
+        <div class="input-group">
+          <input type="file" name="profile_pic" class="form-control" accept="image/*">
+          <button type="submit" class="btn btn-warning">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const openSettingsBtn = document.getElementById('openSettings');
+    const openSettingsMobileBtn = document.getElementById('openSettingsMobile');
+    const closeSettingsBtn = document.getElementById('closeSettings');
+    const settingsModal = document.getElementById('settingsModal');
+
+    openSettingsBtn.addEventListener('click', () => settingsModal.classList.add('show'));
+    openSettingsMobileBtn.addEventListener('click', () => settingsModal.classList.add('show'));
+    closeSettingsBtn.addEventListener('click', () => settingsModal.classList.remove('show'));
+  </script>
+</body>
+</html>

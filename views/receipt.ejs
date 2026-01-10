@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdrawal Receipt – Profit Gainer</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/wallet.css">
+</head>
+<body>
+  <!-- Sidebar / Desktop Navbar -->
+  <aside class="sidebar d-none d-lg-flex">
+    <div class="sidebar-header text-center mb-4">
+      <h2><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h2>
+    </div>
+    <ul class="sidebar-menu list-unstyled">
+      <li><a href="/dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+      <li><a href="/profile"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="/deposits"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+      <li><a href="/wallet" class="active"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+      <li><a href="/applyFunds"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+      <li><a href="/investments"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+      <li><a href="/support"><i class="fa-solid fa-headset"></i> Support</a></li>
+      <li><a class="text-danger" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Mobile Header -->
+  <header class="d-lg-none">
+    <nav class="navbar navbar-dark glass-nav fixed-top py-2 px-3">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <h6 class="mb-0 text-warning fw-bold d-flex align-items-center">
+          <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+        </h6>
+        <button class="btn btn-outline-light ms-3 nav-toggle-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Open navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Offcanvas Mobile Nav -->
+  <div class="offcanvas offcanvas-start glass-nav text-white" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-warning d-flex align-items-center" id="mobileNavLabel">
+        <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="mobile-nav list-unstyled mb-0">
+        <li><a href="/dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="/profile" class="nav-link"><i class="fa-solid fa-user"></i> Profile</a></li>
+        <li><a href="/deposits" class="nav-link"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+        <li><a href="/wallet" class="nav-link active"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+        <li><a href="/applyFunds" class="nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+        <li><a href="/investments" class="nav-link"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+        <li><a href="/support" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a></li>
+        <li><a href="/logout" class="nav-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <div class="wallet-container">
+      <h2 class="wallet-title">💸 Withdrawal Receipt</h2>
+
+      <!-- Success Message -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Withdrawal Successful! Your funds have been sent.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <!-- Receipt Details -->
+      <div class="wallet-section mb-5">
+        <h4 class="section-title">Transaction Details</h4>
+        <div class="receipt-details">
+          <div class="receipt-item">
+            <span class="label">Transaction ID:</span>
+            <span class="value"><%= transaction.id %></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Amount Withdrawn:</span>
+            <span class="value">$<%= Number(transaction.usd_amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Crypto Amount:</span>
+            <span class="value"><%= Number(transaction.crypto_amount).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 }) %> <%= transaction.currency %></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Wallet Address:</span>
+            <span class="value"><%= transaction.wallet_address %></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Date:</span>
+            <span class="value"><%= new Date(transaction.created_at).toLocaleString() %></span>
+          </div>
+          <div class="receipt-item">
+            <span class="label">Status:</span>
+            <span class="value"><%= transaction.status %></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back to Wallet Button -->
+      <div class="text-center">
+        <a href="/wallet" class="btn btn-gradient">Back to Wallet</a>
+      </div>
+    </div>
+
+    <footer class="footer mt-auto text-center">
+      <p>© 2025 Profit-Gainer Platform. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

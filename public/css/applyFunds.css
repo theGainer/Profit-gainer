@@ -1,0 +1,251 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: bgShift 15s ease infinite;
+    color: #fff;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Gradient Animation */
+@keyframes bgShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.sidebar-header h2 {
+    font-size: 1.6rem;
+    color: #ffd700;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar-menu li a i {
+    margin-right: 12px;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffd700;
+}
+
+/* Glass Nav */
+.glass-nav {
+    background: rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(10px);
+}
+
+/* Offcanvas Left (Mobile) */
+.offcanvas-start {
+    width: 250px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+}
+
+/* Mobile Nav */
+.mobile-nav li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav li a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav li a:hover,
+.mobile-nav li a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffd700;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    margin-left: 250px;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+}
+
+/* Header */
+.main-header h1 {
+    color: #00d4ff;
+    margin-bottom: 0.3rem;
+}
+
+.main-header p {
+    color: #eee;
+    margin-bottom: 30px;
+}
+
+/* Stat cards */
+.stat-card {
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.35);
+}
+
+/* Gradient Card */
+.gradient-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Form Glass Card */
+form .stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Form elements */
+form .form-label {
+    color: #3070e6;
+    font-weight: 500;
+}
+
+form .form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #1e0101;
+    border-radius: 8px;
+}
+
+form .form-control::placeholder {
+    color: #160101;
+}
+
+form .form-control:focus {
+    border-color: #4dd637;
+    box-shadow: 0 0 10px rgba(77, 214, 55, 0.5);
+    color: #140000;
+}
+
+/* Buttons */
+.btn-gradient {
+    background: linear-gradient(90deg, #4dd637, #1ed760);
+    border: none;
+    font-weight: 600;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #1ed760, #4dd637);
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Credit Card Collapse */
+.collapse .card-body {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.collapse .form-label {
+    color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .main-header h1 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Smooth scrolling */
+body,
+html {
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %> - PROFIT-GAINER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/deposit.css">
+</head>
+<body>
+
+  <!-- Sidebar (desktop) -->
+  <aside class="sidebar d-none d-md-flex">
+    <div class="sidebar-header text-center mb-4">
+      <h2><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h2>
+    </div>
+    <ul class="sidebar-menu list-unstyled">
+        <li><a href="/dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="/profile" class="nav-link"><i class="fa-solid fa-user"></i> Profile</a></li>
+        <li><a href="/deposits" class="nav-link active"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+        <li><a href="/wallet" class="nav-link"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+        <li><a href="/applyFunds" class="nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+        <li><a href="/investments" class="nav-link"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+        <li><a href="/support"><i class="fa-solid fa-headset"></i> Support</a></li>
+        <li><a href="/logout" class="nav-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Mobile Navbar -->
+  <nav class="navbar navbar-dark glass-nav d-md-none">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <h5 class="mb-0 text-warning fw-bold d-flex align-items-center">
+        <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+      </h5>
+      <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Menu (mobile) -->
+  <div class="offcanvas offcanvas-start glass-nav text-white" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title"><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="mobile-nav list-unstyled">
+        <li><a href="/dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="/profile" class="nav-link"><i class="fa-solid fa-user"></i> Profile</a></li>
+        <li><a href="/deposits" class="nav-link active"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+        <li><a href="/wallet" class="nav-link"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+        <li><a href="/applyFunds" class="nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+        <li><a href="/investments" class="nav-link"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+        <li><a href="/support" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a></li>
+        <li><a href="/logout" class="nav-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="main-header d-flex justify-content-between align-items-center mb-4">
+      <h1 class="text-white">Deposits</h1>
+      <button class="btn btn-glass" id="openDepositModal">
+        <i class="fa-solid fa-plus"></i> Make Deposit
+      </button>
+    </header>
+
+    <!-- Crypto cards -->
+    <div class="row mb-4 g-3">
+      <div class="col-md-3 col-sm-6 d-flex">
+        <div class="crypto-card glassmorphic text-center p-4 shadow w-100">
+          <i class="fa-brands fa-bitcoin fa-3x text-warning mb-3"></i>
+          <h5 class="text-white">Bitcoin</h5>
+          <p class="text-white">Current Price: $113,500</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 d-flex">
+        <div class="crypto-card glassmorphic text-center p-4 shadow w-100">
+          <i class="fa-brands fa-ethereum fa-3x text-primary mb-3"></i>
+          <h5 class="text-white">Ethereum</h5>
+          <p class="text-white">Current Price: $4,200</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 d-flex">
+        <div class="crypto-card glassmorphic text-center p-4 shadow w-100">
+          <i class="fa-solid fa-dollar-sign fa-3x text-success mb-3"></i>
+          <h5 class="text-white">USDT</h5>
+          <p class="text-white">Stablecoin</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 d-flex">
+        <div class="crypto-card glassmorphic text-center p-4 shadow w-100">
+          <i class="fa-brands fa-litecoin fa-3x text-info mb-3"></i>
+          <h5 class="text-white">Litecoin</h5>
+          <p class="text-white">Current Price: $180</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <% if (success && success.length > 0) { %>
+        <div class="alert alert-success"><%= success %></div>
+      <% } %>
+      <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <div class="row g-3">
+        <% if (!deposits || deposits.length === 0) { %>
+          <p class="text-center text-light">No deposits yet.</p>
+        <% } %>
+        <% deposits.forEach(deposit => { %>
+          <div class="col-md-4 col-sm-6 d-flex">
+            <div class="card glassmorphic p-3 shadow w-100">
+              <h5 class="text-white">$<%= deposit.amount %></h5>
+              <p class="text-white">Method: <%= deposit.payment_method %></p>
+              <p class="text-white">Status: 
+                <span class="badge bg-<%= deposit.status === 'Completed' ? 'success' : 'warning' %>">
+                  <%= deposit.status %>
+                </span>
+              </p>
+              <small class="text-white"><%= deposit.created_at.toLocaleString() %></small>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </main>
+
+  <!-- Deposit Modal -->
+  <div class="modal fade" id="depositModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content glassmorphic p-4">
+        <form action="/deposits/add" method="POST">
+          <div class="modal-header">
+            <h5 class="modal-title text-white">Make a Crypto Deposit</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body row">
+            <div class="col-md-6 mb-3">
+              <label class="text-white">Amount (USD)</label>
+              <input type="number" name="amount" class="form-control" min="1" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="text-white">Crypto Method</label>
+              <select name="payment_method" id="cryptoSelect" class="form-select" required>
+                <option value="">Select Crypto</option>
+                <option value="Bitcoin">Bitcoin (BTC)</option>
+                <option value="Ethereum">Ethereum (ETH)</option>
+                <option value="USDT">USDT (TRC20)</option>
+                <option value="Litecoin">Litecoin (LTC)</option>
+              </select>
+            </div>
+            <div class="col-12 mb-3">
+              <label class="text-white">Send to Wallet Address</label>
+              <div class="input-group">
+                <input type="text" id="walletAddress" class="form-control" value="" placeholder="Select a crypto method" readonly>
+                <button type="button" class="btn btn-outline-light" id="copyAddress"><i class="fa-solid fa-copy"></i></button>
+              </div>
+              <small class="text-white">Copy the wallet address and send your crypto.</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success w-100">Confirm Deposit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Wallet addresses per crypto
+    const walletAddresses = {
+      "Bitcoin": "bc1qkar5udlu03s0uqng0nxl9t8rlfgq4h84q0w9yu",
+      "Ethereum": "0x187Ae189D302997B961015818588175af113347C",
+      "USDT": "0x187Ae189D302997B961015818588175af113347C",
+      "Litecoin": "ltc1q0mnnnquh0lv97303dhfs5rg5nmz6meryftmtzq"
+    };
+
+    const cryptoSelect = document.getElementById("cryptoSelect");
+    const walletInput = document.getElementById("walletAddress");
+
+    // Update wallet address on selection
+    cryptoSelect.addEventListener("change", () => {
+      const selected = cryptoSelect.value;
+      walletInput.value = walletAddresses[selected] || "";
+    });
+
+    // Deposit modal
+    const depositModal = new bootstrap.Modal(document.getElementById('depositModal'));
+    document.getElementById('openDepositModal').addEventListener('click', () => {
+      depositModal.show();
+    });
+
+    // Copy wallet address
+    document.getElementById("copyAddress").addEventListener("click", () => {
+      if (!walletInput.value) {
+        alert("Please select a crypto method first.");
+        return;
+      }
+      walletInput.select();
+      walletInput.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(walletInput.value);
+      alert("Wallet address copied: " + walletInput.value);
+    });
+  </script>
+</body>
+</html>

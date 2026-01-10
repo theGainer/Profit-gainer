@@ -1,0 +1,22 @@
+<aside class="sidebar">
+  <div class="sidebar-header text-center mb-4">
+    <h2><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h2>
+  </div>
+  <ul class="sidebar-menu list-unstyled">
+    <li><a href="/dashboard" class="<%= currentPage === 'dashboard' ? 'active' : '' %>">
+      <i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+    <li><a href="/profile" class="<%= currentPage === 'profile' ? 'active' : '' %>">
+      <i class="fa-solid fa-user"></i> Profile</a></li>
+    <li><a href="/deposits" class="<%= currentPage === 'deposits' ? 'active' : '' %>">
+      <i class="fa-solid fa-wallet"></i> Deposits</a></li>
+    <li><a href="/wallet" class="<%= currentPage === 'wallet' ? 'active' : '' %>">
+      <i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+    <li><a href="/applyFunds" class="<%= currentPage === 'applyFunds' ? 'active' : '' %>">
+      <i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+    <li><a href="/investment" class="<%= currentPage === 'investment' ? 'active' : '' %>">
+      <i class="fa-solid fa-briefcase"></i> Invest</a></li>
+    <li><a href="#" id="openSettings" class="<%= currentPage === 'settings' ? 'active' : '' %>">
+      <i class="fa-solid fa-gear"></i> Settings</a></li>
+    <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+  </ul>
+</aside>

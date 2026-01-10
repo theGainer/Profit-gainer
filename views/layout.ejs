@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %> - PROFIT-GAINER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/layout.css">
+</head>
+<body>
+
+  <!-- Mobile Navbar / Header -->
+  <header class="d-lg-none">
+    <nav class="navbar navbar-dark glass-nav py-2">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <h6 class="mb-0 text-warning fw-bold text-truncate d-flex align-items-center">
+          <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+        </h6>
+        <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sidebar (desktop only) -->
+  <aside class="sidebar d-none d-lg-flex flex-column">
+    <div class="sidebar-header text-center mb-4">
+      <h4 class="m-0"><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h4>
+    </div>
+    <ul class="sidebar-menu list-unstyled mb-0">
+      <li><a href="/register"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+      <li><a href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+    </ul>
+  </aside>
+
+  <!-- Offcanvas Sidebar (mobile/tablet) -->
+  <div class="offcanvas offcanvas-start glass-nav text-white" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title d-flex align-items-center gap-2" id="offcanvasSidebarLabel">
+        <i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="mobile-nav list-unstyled mb-0">
+        <li><a href="/register" class="nav-link"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+        <li><a href="/login" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <header class="main-header text-center mb-4 d-none d-lg-block">
+      <h1>Welcome, Trader 👋</h1>
+      <p>Track your crypto investments and profits</p>
+    </header>
+
+    <!-- Landing Features -->
+    <section class="landing-content">
+      <div class="container py-5">
+        <div class="row text-center">
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-coins fa-2x text-warning mb-2"></i>
+              <h5>Invest</h5>
+              <p>Grow your crypto portfolio smartly.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-chart-line fa-2x text-success mb-2"></i>
+              <h5>Track Profits</h5>
+              <p>See your investments grow in real-time.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-shield fa-2x text-primary mb-2"></i>
+              <h5>Secure</h5>
+              <p>Your funds are protected with top security.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-bolt fa-2x text-danger mb-2"></i>
+              <h5>Fast</h5>
+              <p>Execute trades instantly with low latency.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-lightbulb fa-2x text-info mb-2"></i>
+              <h5>Startup Funds</h5>
+              <p>Apply for initial funding with low interest.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-wallet fa-2x text-warning mb-2"></i>
+              <h5>Wallet</h5>
+              <p>Manage your crypto funds easily.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-chart-pie fa-2x text-success mb-2"></i>
+              <h5>Analytics</h5>
+              <p>Detailed analytics for better decisions.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-gem fa-2x text-primary mb-2"></i>
+              <h5>Crypto Assets</h5>
+              <p>Explore and diversify your crypto holdings.</p>
+            </div>
+          </div>
+
+          <!-- About Profit Gainer Card -->
+          <div class="col-12 mb-4">
+            <div class="feature-card p-4 shadow rounded">
+              <i class="fa-solid fa-info-circle fa-2x text-info mb-2"></i>
+              <h5>About Profit Gainer</h5>
+              <p>Profit Gainer empowers you to invest in crypto without the risk or complexity. Our expert traders manage your capital, trading on top exchanges to maximize profits. Earn passive income with real-time profit tracking, secure wallets, and low-interest startup loans for reinvestment. Start with as little as $500 and let our professionals grow your wealth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer mt-auto text-center">
+      <p>© 2025 Broker Platform. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

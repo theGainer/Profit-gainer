@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wallet – Profit Gainer</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/wallet.css">
+</head>
+<body>
+  <!-- Sidebar / Desktop Navbar -->
+  <aside class="sidebar d-none d-lg-flex">
+    <div class="sidebar-header text-center mb-4">
+      <h2><i class="fa-solid fa-coins text-warning"></i> PROFIT GAINER</h2>
+    </div>
+    <ul class="sidebar-menu list-unstyled">
+      <li><a href="/dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+      <li><a href="/profile"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="/deposits"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+      <li><a href="/wallet" class="active"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+      <li><a href="/applyFunds"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+      <li><a href="/investments"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+      <li><a href="/support"><i class="fa-solid fa-headset"></i> Support</a></li>
+      <li><a class="text-danger" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Mobile Header -->
+  <header class="d-lg-none">
+    <nav class="navbar navbar-dark glass-nav fixed-top py-2 px-3">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <h6 class="mb-0 text-warning fw-bold d-flex align-items-center">
+          <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+        </h6>
+        <button class="btn btn-outline-light ms-3 nav-toggle-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Open navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Offcanvas Mobile Nav -->
+  <div class="offcanvas offcanvas-start glass-nav text-white" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-warning d-flex align-items-center" id="mobileNavLabel">
+        <i class="fa-solid fa-coins me-2"></i> PROFIT GAINER
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="mobile-nav list-unstyled mb-0">
+        <li><a href="/dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="/profile" class="nav-link"><i class="fa-solid fa-user"></i> Profile</a></li>
+        <li><a href="/deposits" class="nav-link"><i class="fa-solid fa-wallet"></i> Deposits</a></li>
+        <li><a href="/wallet" class="nav-link active"><i class="fa-solid fa-money-bill-transfer"></i> Wallet</a></li>
+        <li><a href="/applyFunds" class="nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Apply Funds</a></li>
+        <li><a href="/investments" class="nav-link"><i class="fa-solid fa-briefcase"></i> Invest</a></li>
+        <li><a href="/support" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a></li>
+        <li><a href="/logout" class="nav-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <div class="wallet-container">
+      <h2 class="wallet-title">💰 My Wallet</h2>
+
+      <!-- Success/Error Messages -->
+      <% if (success && success.length > 0) { %>
+        <% success.forEach(message => { %>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% }) %>
+      <% } %>
+      <% if (error && error.length > 0) { %>
+        <% error.forEach(message => { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% }) %>
+      <% } %>
+
+      <!-- Balance Cards -->
+      <div class="wallet-cards d-flex flex-wrap justify-content-center gap-4 mb-4">
+        <div class="wallet-card">
+          <h5>USD Balance</h5>
+          <p class="card-value">$<%= wallet.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></p>
+        </div>
+        <div class="wallet-card">
+          <h5>BTC Holdings</h5>
+          <p class="card-value"><%= wallet.btc.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 }) %> BTC</p>
+        </div>
+        <div class="wallet-card">
+          <h5>ETH Holdings</h5>
+          <p class="card-value"><%= wallet.eth.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 }) %> ETH</p>
+        </div>
+      </div>
+
+      <!-- Withdraw Funds -->
+      <div class="wallet-section mb-5">
+        <h4 class="section-title">Withdraw Funds</h4>
+        <form action="/wallet/withdraw" method="POST" class="wallet-form">
+          <div class="mb-3">
+            <label for="amount" class="form-label text-primary">Amount (USD)</label>
+            <input type="number" class="form-control" id="amount" name="amount" min="1" step="0.01" required>
+          </div>
+          <div class="mb-3">
+            <label for="currency" class="form-label text-primary">Crypto Asset for Withdrawal</label>
+            <select name="currency" id="currency" class="form-select bg-dark" required>
+              <option value="BTC">BTC</option>
+              <option value="ETH">ETH</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="wallet_address" class="form-label text-primary">Wallet Address</label>
+            <input type="text" class="form-control" id="wallet_address" name="wallet_address" placeholder="Enter wallet address" required>
+          </div>
+          <button type="submit" class="btn btn-gradient w-100">Withdraw</button>
+        </form>
+      </div>
+
+      <!-- Transactions -->
+      <div class="wallet-section">
+        <h4 class="section-title">Transaction History</h4>
+        <div class="table-responsive">
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody">
+              <% if (transactions && transactions.length > 0) { %>
+                <% transactions.forEach((tx, index) => { %>
+                  <tr class="<%= index >= 5 ? 'transaction-hidden' : '' %>">
+                    <td><%= tx.type %></td>
+                    <td><%= Number(tx.amount).toFixed(tx.currency === 'USD' ? 2 : 4) %></td>
+                    <td><%= tx.currency %></td>
+                    <td><%= tx.status %></td>
+                    <td><%= new Date(tx.created_at).toLocaleString() %></td>
+                  </tr>
+                <% }) %>
+              <% } else { %>
+                <tr>
+                  <td colspan="5" class="text-center">No transactions yet</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        <% if (transactions && transactions.length > 5) { %>
+          <div class="text-center mt-3">
+            <button id="seeMoreBtn" class="btn btn-gradient">See More</button>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <footer class="footer mt-auto text-center">
+      <p>© 2025 Profit-Gainer Platform. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const seeMoreBtn = document.getElementById('seeMoreBtn');
+      const transactionTableBody = document.getElementById('transactionTableBody');
+      
+      if (seeMoreBtn && transactionTableBody) {
+        const hiddenRows = transactionTableBody.querySelectorAll('.transaction-hidden');
+        
+        if (hiddenRows.length > 0) {
+          seeMoreBtn.addEventListener('click', () => {
+            const isHidden = hiddenRows[0].classList.contains('transaction-hidden');
+            hiddenRows.forEach(row => {
+              if (isHidden) {
+                row.classList.remove('transaction-hidden');
+                row.classList.add('transaction-visible');
+              } else {
+                row.classList.add('transaction-hidden');
+                row.classList.remove('transaction-visible');
+              }
+            });
+            seeMoreBtn.textContent = isHidden ? 'Show Less' : 'See More';
+          });
+        } else {
+          seeMoreBtn.style.display = 'none'; // Hide button if no hidden rows
+        }
+      }
+    });
+  </script>
+</body>
+</html>
